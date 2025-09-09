@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { RecipeService } from '../../core/services/recipe.service';
@@ -16,13 +16,16 @@ export class Home {
   recipes: Recipe[] = [];
   loading = false;
 
-  constructor(private recipeSvc: RecipeService) {}
+  private recipeSvc = inject(RecipeService);
+
+  constructor() {}
 
   onSearch() {
     this.loading = true;
     this.recipeSvc.searchMeals(this.query).subscribe((list) => {
       this.recipes = list;
       this.loading = false;
+      this.query = '';
     });
   }
 }

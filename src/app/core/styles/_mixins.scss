@@ -1,0 +1,23 @@
+// _mixins.scss
+
+// A reusable card mixin for recipe cards, modals, etc.
+@mixin card($padding: 1rem, $radius: 0.75rem, $shadow: 0 2px 6px rgba(0, 0, 0, 0.1)) {
+  padding: $padding;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  background-color: white;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// A text truncate mixin to cleanly shorten long descriptions
+@mixin text-truncate($lines: 2) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+}
