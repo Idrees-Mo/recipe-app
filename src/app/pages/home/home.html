@@ -22,7 +22,7 @@
   <!-- Results -->
   <ng-container>
     @if(!loading() && recipes().length > 0) {
-    <app-results [recipes]="filtered()"></app-results>
+    <app-results [recipes]="filteredRecipes()"></app-results>
     }
   </ng-container>
 </div>

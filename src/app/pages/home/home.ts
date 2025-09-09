@@ -15,7 +15,7 @@ import { LoadingSpinner } from '../../shared/components/loading-spiner/loading-s
 export class Home {
   query = signal('');
   recipes = signal<Recipe[]>([]);
-  filtered = signal<Recipe[]>([]);
+  filteredRecipes = signal<Recipe[]>([]);
   loading = signal(false);
 
   constructor(private recipeService: RecipeService) {}
@@ -25,14 +25,14 @@ export class Home {
     this.query.set(value);
 
     if (!value) {
-      this.filtered.set(this.recipes());
+      this.filteredRecipes.set(this.recipes());
       return;
     }
     if (!this.recipes().length) {
       return;
     }
     const q = value.toLowerCase();
-    this.filtered.set(
+    this.filteredRecipes.set(
       this.recipes().filter(
         (r) => r.title.toLowerCase().includes(q) || r.instructions?.toLowerCase().includes(q)
       )
@@ -44,9 +44,9 @@ export class Home {
     this.loading.set(true);
     console.warn('Searching for', this.query());
     this.recipeService.searchMeals(this.query()).subscribe({
-      next: (meals) => {
-        this.recipes.set(meals);
-        this.filtered.set(meals); // reset filter after fetch
+      next: (foundRecipes) => {
+        this.recipes.set(foundRecipes);
+        this.filteredRecipes.set(foundRecipes); // reset filter after fetch
         this.loading.set(false);
         this.query.set('');
       },
