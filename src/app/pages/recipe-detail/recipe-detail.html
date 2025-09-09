@@ -1,6 +1,6 @@
 <div class="max-w-4xl mx-auto my-12 bg-white rounded-xl shadow-lg overflow-hidden">
   @if (loading) {
-  <div class="p-8 text-center text-gray-500">Loading recipe…</div>
+  <app-loading-spinner></app-loading-spinner>
   } @if (!loading && meal) {
   <div class="w-full h-24 sm:h-80 lg:h-96">
     <img
