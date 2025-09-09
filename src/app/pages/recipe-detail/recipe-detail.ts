@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Recipe } from '../../core/models/recipe';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../../core/services/recipe.service';
@@ -15,6 +16,7 @@ export class RecipeDetail implements OnInit {
 
   // private recipeSvc = inject(RecipeService);
   private route = inject(ActivatedRoute);
+  private location = inject(Location);
 
   constructor(private recipeSvc: RecipeService) {}
 
@@ -24,5 +26,9 @@ export class RecipeDetail implements OnInit {
       this.meal = m;
       this.loading = false;
     });
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
