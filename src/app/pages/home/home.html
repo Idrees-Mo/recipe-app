@@ -14,10 +14,10 @@
   <div class="text-center p-8">Loading recipes…</div>
   } @if (!loading && recipes.length === 0 && query) {
   <div class="text-center p-8 text-gray-600">No recipes found. Try another search.</div>
-  } <<ng-container>
+  }
+  <ng-container>
     @if(!loading && recipes.length > 0) {
     <app-results [recipes]="recipes"></app-results>
-    } </ng-container
-  >>
+    }
+  </ng-container>
 </div>
->
