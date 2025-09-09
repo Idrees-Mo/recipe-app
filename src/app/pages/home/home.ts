@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { RecipeService } from '../../core/services/recipe.service';
@@ -13,20 +13,46 @@ import { LoadingSpinner } from '../../shared/components/loading-spiner/loading-s
   styleUrl: './home.scss',
 })
 export class Home {
-  query = '';
-  recipes: Recipe[] = [];
-  loading = false;
+  query = signal('');
+  recipes = signal<Recipe[]>([]);
+  filtered = signal<Recipe[]>([]);
+  loading = signal(false);
 
-  private recipeSvc = inject(RecipeService);
+  constructor(private recipeService: RecipeService) {}
 
-  constructor() {}
+  // filter locally (when typing)
+  onQueryChange(value: string) {
+    this.query.set(value);
 
-  onSearch() {
-    this.loading = true;
-    this.recipeSvc.searchMeals(this.query).subscribe((list) => {
-      this.recipes = list;
-      this.loading = false;
-      this.query = '';
+    if (!value) {
+      this.filtered.set(this.recipes());
+      return;
+    }
+    if (!this.recipes().length) {
+      return;
+    }
+    const q = value.toLowerCase();
+    this.filtered.set(
+      this.recipes().filter(
+        (r) => r.title.toLowerCase().includes(q) || r.instructions?.toLowerCase().includes(q)
+      )
+    );
+  }
+
+  // fetch fresh recipes (when clicking Search)
+  onSearchSubmit() {
+    this.loading.set(true);
+    console.warn('Searching for', this.query());
+    this.recipeService.searchMeals(this.query()).subscribe({
+      next: (meals) => {
+        this.recipes.set(meals);
+        this.filtered.set(meals); // reset filter after fetch
+        this.loading.set(false);
+        this.query.set('');
+      },
+      error: () => {
+        this.loading.set(false);
+      },
     });
   }
 }

@@ -1,25 +1,28 @@
 <div class="max-w-6xl mx-auto p-6 text-center">
   <!-- Search form -->
   <h1 class="text-3xl font-bold mb-4">Recipe Finder</h1>
-  <form (ngSubmit)="onSearch()" class="flex gap-2 justify-center mb-8">
+  <form (ngSubmit)="onSearchSubmit()" class="flex gap-2 justify-center mb-8">
     <input
-      name="q"
-      [(ngModel)]="query"
+      name="search"
+      [ngModel]="query()"
+      (ngModelChange)="onQueryChange($event)"
       class="flex-1 p-3 border rounded max-w-md"
       placeholder="Search e.g. 'chicken'"
     />
-    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Find Recipes</button>
+    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded" [disabled]="loading()">
+      Find Recipes
+    </button>
   </form>
   <!-- Loading & no results messages -->
-  @if (loading) {
+  @if (loading()) {
   <app-loading-spinner></app-loading-spinner>
-  } @if (!loading && recipes.length === 0 && query) {
+  } @if (!loading && recipes.length === 0 && query() === '') {
   <div class="text-center p-8 text-gray-600">No recipes found. Try another search.</div>
   }
   <!-- Results -->
   <ng-container>
-    @if(!loading && recipes.length > 0) {
-    <app-results [recipes]="recipes"></app-results>
+    @if(!loading() && recipes().length > 0) {
+    <app-results [recipes]="filtered()"></app-results>
     }
   </ng-container>
 </div>
