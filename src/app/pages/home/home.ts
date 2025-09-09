@@ -11,6 +11,7 @@ import { NgFor, NgIf } from '@angular/common';
   styleUrl: './home.scss',
 })
 export class Home implements OnInit {
+  query = '';
   recipes: Recipe[] = [];
   loading = false;
 

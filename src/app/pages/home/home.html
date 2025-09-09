@@ -1,5 +1,14 @@
 <div class="max-w-6xl mx-auto p-6 text-center">
   <h1 class="text-3xl font-bold mb-4">Recipe Finder</h1>
+  <form (ngSubmit)="onSearch()" class="flex gap-2 justify-center mb-8">
+    <input
+      name="q"
+      [(ngModel)]="query"
+      class="flex-1 p-3 border rounded max-w-md"
+      placeholder="Search e.g. 'chicken'"
+    />
+    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Find Recipes</button>
+  </form>
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
     <ng-container *ngFor="let r of recipes">
       <app-recipe-card [recipe]="r"></app-recipe-card>
