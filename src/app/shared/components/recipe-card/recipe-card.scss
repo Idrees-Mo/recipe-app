@@ -1,0 +1,19 @@
+@use '../../../core/styles/_mixins' as m;
+
+:host {
+  @include m.card(1rem, 0.75rem);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.recipe-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.recipe-description {
+  color: #555;
+  font-size: 0.875rem;
+  @include m.text-truncate(2); // Only show 2 lines max
+}
