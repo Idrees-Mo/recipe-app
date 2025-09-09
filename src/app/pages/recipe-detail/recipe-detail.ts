@@ -3,10 +3,11 @@ import { Location } from '@angular/common';
 import { Recipe } from '../../core/models/recipe';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../../core/services/recipe.service';
+import { LoadingSpinner } from '../../shared/components/loading-spiner/loading-spiner';
 
 @Component({
   selector: 'app-recipe-detail',
-  imports: [],
+  imports: [LoadingSpinner],
   templateUrl: './recipe-detail.html',
   styleUrl: './recipe-detail.scss',
 })

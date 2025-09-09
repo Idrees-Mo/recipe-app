@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { RecipeService } from '../../core/services/recipe.service';
 import { Recipe } from '../../core/models/recipe';
 import { Results } from '../results/results';
+import { LoadingSpinner } from '../../shared/components/loading-spiner/loading-spiner';
 
 @Component({
   selector: 'app-home',
-  imports: [Results, FormsModule],
+  imports: [Results, LoadingSpinner, FormsModule],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
