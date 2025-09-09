@@ -11,7 +11,5 @@ import { SlicePipe } from '@angular/common';
 })
 export class RecipeCard {
   @Input({ required: true }) recipe!: Recipe;
-  constructor() {
-    console.warn(this.recipe);
-  }
+  constructor() {}
 }
