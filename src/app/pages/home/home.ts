@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Recipe } from '../../core/models/recipe';
-import { mockRecipes } from '../../core/mocks/recipe.mock';
-import { RecipeCard } from '../../shared/components/recipe-card/recipe-card';
 import { NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 import { RecipeService } from '../../core/services/recipe.service';
+import { Recipe } from '../../core/models/recipe';
+import { RecipeCard } from '../../shared/components/recipe-card/recipe-card';
+import { mockRecipes } from '../../core/mocks/recipe.mock';
 
 @Component({
   selector: 'app-home',
