@@ -9,6 +9,12 @@
     />
     <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Find Recipes</button>
   </form>
+  <!-- Loading & no results messages -->
+  <div *ngIf="loading" class="text-center p-8">Loading recipes…</div>
+
+  <div *ngIf="!loading && recipes.length === 0 && query" class="text-center p-8 text-gray-600">
+    No recipes found. Try another search.
+  </div>
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
     <ng-container *ngFor="let r of recipes">
       <app-recipe-card [recipe]="r"></app-recipe-card>

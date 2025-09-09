@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { RecipeService } from '../../core/services/recipe.service';
@@ -9,19 +9,16 @@ import { mockRecipes } from '../../core/mocks/recipe.mock';
 
 @Component({
   selector: 'app-home',
-  imports: [RecipeCard, NgFor, FormsModule],
+  imports: [RecipeCard, NgFor, NgIf, FormsModule],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
-export class Home implements OnInit {
+export class Home {
   query = '';
   recipes: Recipe[] = [];
   loading = false;
 
   constructor(private recipeSvc: RecipeService) {}
-  ngOnInit() {
-    this.recipes = mockRecipes;
-  }
 
   onSearch() {
     this.loading = true;
