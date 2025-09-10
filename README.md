@@ -7,7 +7,7 @@ An Angular 20 application, featuring recipe search and filtering.
 - Recipe detail pages to show recipe details
 - TailwindCSS for styling
 - SCSS for custom styles
-- Unit tests (WIP)
+- Unit tests for home component and recipe service
 - SSR (WIP)
 
 ## Development server
